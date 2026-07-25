@@ -356,3 +356,108 @@ function App() {
   );
 }
 export default App;
+
+
+//EXTRA 
+//==============EXTRA (To-DO-List ):====================
+Code:
+App.jsx:
+import { useState } from "react";
+import "./App.css";
+function App() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  // Add Task
+  const addTask = () => {
+    if (newTask.trim() !== "") {
+      setTasks([...tasks, newTask]);
+      setNewTask("");
+    }
+  };
+  // Delete Task
+  const deleteTask = (index) => {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+  };
+  return (
+    <div className="container">
+      <h1>My To-Do List</h1>
+      <hr />
+      {/* Input Field */}
+      <input
+        type="text"
+        placeholder="Enter new task"
+        value={newTask}
+        onChange={(e) => setNewTask(e.target.value)}
+      />
+      <button onClick={addTask}>Add Task</button>
+      <br></br>
+      {/* Display Tasks */}
+      <ul className="task-list">
+        {tasks.map((task, index) => (
+          <li key={index}>
+            {task}
+            <button
+              className="delete-btn"
+              onClick={() => deleteTask(index)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+      <h4>Pranay T0030</h4>
+    </div>
+  );
+}
+export default App;
+
+App.css:
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+/* Input Field */
+input {
+  padding: 8px;
+  font-size: 14px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+/* Add Button */
+button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background-color: #d62828;
+}
+/* Task List with BULLETS */
+.task-list {
+  margin-top: 20px;
+  text-align: left;
+  display: inline-block;
+  list-style-type: disc;   /* 👈 Bullet Points */
+  padding-left: 20px;
+}
+/* Each Task */
+.task-list li {
+  margin: 8px 0;
+  font-size: 16px;
+}
+/* Delete Button */
+.delete-btn {
+  margin-left: 10px;
+  background-color: #555;
+}
+.delete-btn:hover {
+  background-color: #222;
+}
+
